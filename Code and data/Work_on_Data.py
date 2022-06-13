@@ -4,7 +4,6 @@ from sympy import rotations
 from Shape_Droplet import Make_Droplet
 import matplotlib.animation as ani
 from scipy.integrate import solve_ivp
-from Solve_DE import *
 import matplotlib.pyplot as plt
 from scipy.stats.mstats import linregress
 from shapely.geometry import LineString
@@ -20,43 +19,43 @@ Radius_height = np.ones(N)*h_inf*1.01
 
 SD = Make_Droplet(N, L, h_inf, R0)
 
-# # Work on data for J vs Final height and J vs Final radius
+# Work on data for J vs Final height and J vs Final radius
 
-# J = np.array([0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5])
-# Hf = pd.read_csv("Final_Height.csv", header=None).to_numpy()[1:]
-# Rf = pd.read_csv("Final_Radius.csv", header=None).to_numpy()[1:]
+J = np.array([0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5])
+Hf = pd.read_csv("Final_Height.csv", header=None).to_numpy()[1:]
+Rf = pd.read_csv("Final_Radius.csv", header=None).to_numpy()[1:]
 
-# slopeRf, InterWf, _, _, error = linregress(np.log10(J), np.log10(Rf.T/Rf[0]))
-# slopeHf, InterHf, _, _, error = linregress(np.log10(J), np.log10(Hf.T/Hf[0]))
+slopeRf, InterWf, _, _, error = linregress(np.log10(J), np.log10(Rf.T/Rf[0]))
+slopeHf, InterHf, _, _, error = linregress(np.log10(J), np.log10(Hf.T/Hf[0]))
 
-# print(linregress(np.log10(J), np.log10(Rf.T)))
-# print(linregress(np.log10(J), np.log10(Hf.T)))
+print(linregress(np.log10(J), np.log10(Rf.T)))
+print(linregress(np.log10(J), np.log10(Hf.T)))
 
-# fig, ax = plt.subplots()
-# ax.plot(J, Rf/Rf[0])
-# ax.scatter(J, Rf/Rf[0], color="black")
-# ax.set_xlim(0.05, 0.5)
-# ax.set_ylim(0.65, 1)
-# ax.set_xscale("log")
-# ax.set_yscale("log")
-# ax.set_xlabel(r"$\mathfrak{J}$", fontsize=14, rotation=0)
-# ax.set_ylabel(r"$\mathfrak{R}_{f}$", fontsize=14, rotation=0)
-# ax.yaxis.set_minor_formatter(mticker.ScalarFormatter())
-# ax.set_title(r"Final radius vs $\mathfrak{J}$")
-# plt.show()
+fig, ax = plt.subplots()
+ax.plot(J, Rf/Rf[0])
+ax.scatter(J, Rf/Rf[0], color="black")
+ax.set_xlim(0.05, 0.5)
+ax.set_ylim(0.65, 1)
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_xlabel(r"$\mathfrak{J}$", fontsize=14, rotation=0)
+ax.set_ylabel(r"$\mathfrak{R}_{f}$", fontsize=14, rotation=0)
+ax.yaxis.set_minor_formatter(mticker.ScalarFormatter())
+ax.set_title(r"Final radius vs $\mathfrak{J}$")
+plt.show()
 
-# fig, ax = plt.subplots()
-# ax.plot(J, Hf/Hf[0])
-# ax.scatter(J, Hf/Hf[0], color="black")
-# ax.set_xlim(0.05, 0.5)
-# ax.set_ylim(1, 1.57)
-# ax.set_xscale("log")
-# ax.set_yscale("log")
-# ax.set_xlabel(r"$\mathfrak{J}$", fontsize=14, rotation=0)
-# ax.set_ylabel(r"$\mathcal{H}_{f}$", fontsize=14, rotation=0)
-# ax.set_title(r"Final height vs $\mathfrak{J}$")
-# ax.yaxis.set_minor_formatter(mticker.ScalarFormatter())
-# plt.show()
+fig, ax = plt.subplots()
+ax.plot(J, Hf/Hf[0])
+ax.scatter(J, Hf/Hf[0], color="black")
+ax.set_xlim(0.05, 0.5)
+ax.set_ylim(1, 1.57)
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_xlabel(r"$\mathfrak{J}$", fontsize=14, rotation=0)
+ax.set_ylabel(r"$\mathcal{H}_{f}$", fontsize=14, rotation=0)
+ax.set_title(r"Final height vs $\mathfrak{J}$")
+ax.yaxis.set_minor_formatter(mticker.ScalarFormatter())
+plt.show()
 
 ######################################################################################
 
