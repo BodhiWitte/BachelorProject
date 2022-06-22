@@ -61,7 +61,7 @@ def Droplet_Spreading(i=int):
     RL, RR, C = Calculate_Radius_Centre(sol.y[:,i*15])
 
     ax.clear()
-    ax.set_ylim(-0.5, 0.5)
+    ax.set_ylim(0, 0.5)
     ax.set_xlim(2.5, 7.5)
     ax.text(0.85, 0.8, f't={round(sol.t[i*15], 0)}', horizontalalignment='center', verticalalignment='center', 
     transform=ax.transAxes, fontsize=12, weight='bold')
@@ -70,7 +70,7 @@ def Droplet_Spreading(i=int):
     arrowprops=dict(facecolor='red', shrink=0.05),horizontalalignment='left',verticalalignment='bottom', fontsize=12, weight="bold")
     p = ax.plot(SD.x, sol.y[:,i*15], color="black", label="Droplet")
     if J > 0:
-        p2 = ax.plot(SD.x, Y[i*5], color="red", linestyle="dashed", label="Yield stress")
+        p2 = ax.plot(SD.x - SD.dx/2, Y[i*15], color="red", linestyle="dashed", label="Yield stress")
     ax.legend()
 
 if J == 0:
@@ -109,6 +109,10 @@ plt.show()
 # Make animation of droplet spreading
 fig, ax = plt.subplots()
 animator = ani.FuncAnimation(fig, Droplet_Spreading, interval = 500)
+
+# Save the animation
+# animator.save("NAME_OF_GIF.gif", fps=2) 
+
 
 plt.show()
 
